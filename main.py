@@ -53,8 +53,11 @@ def get_gain(actions_list, wallet):
         for action_price in combination:
             invest = total_amount / 3
             total_amount -= invest
-            calcule_rendement = (action_price[2] / 100) * total_amount
-            rendement_total += calcule_rendement
+            print(action_price[1])
+            print(total_amount)
+            rendement = (total_amount / action_price[1]) * action_price[2]
+            print(rendement)
+            rendement_total += rendement
             if rendement_total > best_yield:
                 best_yield = rendement_total
                 best_combination = combination
