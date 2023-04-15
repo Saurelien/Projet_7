@@ -44,22 +44,19 @@ def all_combinations(NEW_COMBINATIONS):
 
 
 def get_gain(actions_list, wallet):
-    get_combinations = all_combinations(actions_list)
     best_yield = 0
     wallet = 500
-    for combination in get_combinations:
+    for combination in all_combinations(actions_list):
         total_amount = wallet
-        rendement_total = 0
         for action_price in combination:
-            invest = total_amount / 3
-            total_amount -= invest
-            print(action_price[1])
-            print(total_amount)
+            print(f"Prix par action: {action_price[1]}")
+            print(f"Pourcent de l'action a deux ans: {action_price[2]}")
+            print(f"Total du porte feuille: {total_amount}")
+            print("formule du rendement: portefeuille / prix de l'action * par le rendement")
             rendement = (total_amount / action_price[1]) * action_price[2]
-            print(rendement)
-            rendement_total += rendement
-            if rendement_total > best_yield:
-                best_yield = rendement_total
+            print("Rendement: ", rendement)
+            if rendement > best_yield:
+                best_yield = rendement
                 best_combination = combination
     return best_combination, best_yield
 
@@ -70,7 +67,7 @@ idle_ram = processing.memory_info().rss
 best_combination, best_yield = get_gain(NEW_COMBINATIONS, 500)
 after_ram = processing.memory_info().rss
 end_process = time.time()
-print("Meilleur combinaison", best_combination, "cpu usage: ", end_process - start_process, "en secondes"
+print("Meilleurs combinaisons", best_combination, "cpu usage: ", end_process - start_process, "en secondes"
       , "Usage de la ram: "
       , after_ram - idle_ram, "Byte")
 print("Meilleur rendement", best_yield, "cpu usage: ", end_process - start_process, "en secondes"
