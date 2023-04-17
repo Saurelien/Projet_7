@@ -1,5 +1,4 @@
 import itertools
-from itertools import combinations
 import psutil
 import time
 
@@ -29,22 +28,21 @@ NEW_COMBINATIONS = [
 
 def get_gain_optimized(actions_list, budget_wallet=500):
     best_yield = 0
-    best_combination = []
     # Appel de la fonction " all_combination " dans la boucle des combinaisons possible de la liste en dur
     for combination in itertools.combinations(actions_list, 1):
         for action in combination:
+            # calcule temps de processus:
+            process_time = time.process_time()
             # calcule du rendement " action[1] correspond a l'élément 2 = prix de l'action
             capital = int(budget_wallet / action[1])
             rendement = (capital * action[2]) / 100
         if rendement > best_yield:
             best_yield = rendement
             best_combination = combination
-            # calcule temps de processus:
-            process_time = time.process_time()
-            # Utilisation en ressource
-            progress = psutil.Process()
-            cpu_percent = progress.cpu_percent()
-            memory_usage = progress.memory_percent()
+        # Utilisation en ressource
+        progress = psutil.Process()
+        cpu_percent = progress.cpu_percent()
+        memory_usage = progress.memory_percent()
     return best_combination, best_yield, cpu_percent, memory_usage, process_time
 
 
