@@ -1,18 +1,8 @@
 import itertools
+from itertools import combinations
 import psutil
 import time
-from itertools import combinations
 
-################################################################################################
-################################################################################################
-###       1. Retranscrire les actions dans le code: dans une liste                           ###
-###       2. Écrire une fonction qui prend des paramètres et qui renvoie le rendement réel   ###
-###            20€   100%                                                                    ###
-###            X     5%                                                                      ###
-###       3. Définir toutes les combinaisons possible d’actions.                             ###
-###       4 Trouver pour 500€, quelle combinaison à le meilleur rendement.                   ###
-################################################################################################
-################################################################################################
 NEW_COMBINATIONS = [
     ("#1", 20, 5),
     ("#2", 30, 10),
@@ -37,39 +27,35 @@ NEW_COMBINATIONS = [
                    ]
 
 
-def all_combinations(NEW_COMBINATIONS):
-    new_combinations = list(itertools.combinations(NEW_COMBINATIONS, 3))
-    return new_combinations
+def all_combinations(actions_list):
+    combinations = []
+    for all_combinations in range(1, len(actions_list) + 1):
+        for combination in itertools.combinations(actions_list, all_combinations):
+            combinations.append(combination)
+    return combinations
 
 
-
-def get_gain(actions_list, wallet):
+def get_gain(actions_list, budget_wallet=500):
     best_yield = 0
-    wallet = 500
+    best_combination = []
+    #Appel de la fonction " all_combination " dans la boucle des combinaisons possible de la liste en dur
     for combination in all_combinations(actions_list):
-        total_amount = wallet
-        for action_price in combination:
-            print(f"Prix par action: {action_price[1]}")
-            print(f"Pourcent de l'action a deux ans: {action_price[2]}")
-            print(f"Total du porte feuille: {total_amount}")
-            print("formule du rendement: portefeuille / prix de l'action * par le rendement")
-            rendement = (total_amount / action_price[1]) * action_price[2]
-            print("Rendement: ", rendement)
-            if rendement > best_yield:
-                best_yield = rendement
-                best_combination = combination
-    return best_combination, best_yield
+        for action in combination:
+            #calcule du rendement " action[1] correspond a l'élément 2 = prix de l'action
+            capital = int(budget_wallet / action[1])
+            rendement = capital * action[2] / 100
+        if rendement > best_yield:
+            best_yield = rendement
+            best_combination = combination
+        # calcule temps de processus:
+        progress = psutil.Process()
+        cpu_percent = progress.cpu_percent()
+        memory_usage = progress.memory_percent()
+    return (best_combination, best_yield, cpu_percent, memory_usage)
 
 
-start_process = time.time()
-processing = psutil.Process()
-idle_ram = processing.memory_info().rss
-best_combination, best_yield = get_gain(NEW_COMBINATIONS, 500)
-after_ram = processing.memory_info().rss
-end_process = time.time()
-print("Meilleurs combinaisons", best_combination, "cpu usage: ", end_process - start_process, "en secondes"
-      , "Usage de la ram: "
-      , after_ram - idle_ram, "Byte")
-print("Meilleur rendement", best_yield, "cpu usage: ", end_process - start_process, "en secondes"
-      , "Usage de la ram: "
-      , after_ram - idle_ram, "Byte")
+best_combination, best_yield, cpu_percent, memory_usage = get_gain(NEW_COMBINATIONS, 500)
+print(f"Meilleur combinaison: {best_combination}")
+print(f"Meilleur rendement: {best_yield}")
+print(f"Utilisation du processeur: {cpu_percent}")
+print(f"Utilisation de la RAM: {memory_usage}")
