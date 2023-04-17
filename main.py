@@ -27,35 +27,32 @@ NEW_COMBINATIONS = [
                    ]
 
 
-def all_combinations(actions_list):
-    combinations = []
-    for all_combinations in range(1, len(actions_list) + 1):
-        for combination in itertools.combinations(actions_list, all_combinations):
-            combinations.append(combination)
-    return combinations
-
-
-def get_gain(actions_list, budget_wallet=500):
+def get_gain_optimized(actions_list, budget_wallet=500):
     best_yield = 0
     best_combination = []
-    #Appel de la fonction " all_combination " dans la boucle des combinaisons possible de la liste en dur
-    for combination in all_combinations(actions_list):
+    # Appel de la fonction " all_combination " dans la boucle des combinaisons possible de la liste en dur
+    for combination in itertools.combinations(actions_list, 1):
         for action in combination:
-            #calcule du rendement " action[1] correspond a l'élément 2 = prix de l'action
+            # calcule du rendement " action[1] correspond a l'élément 2 = prix de l'action
             capital = int(budget_wallet / action[1])
-            rendement = capital * action[2] / 100
+            rendement = (capital * action[2]) / 100
         if rendement > best_yield:
             best_yield = rendement
             best_combination = combination
-        # calcule temps de processus:
-        progress = psutil.Process()
-        cpu_percent = progress.cpu_percent()
-        memory_usage = progress.memory_percent()
-    return (best_combination, best_yield, cpu_percent, memory_usage)
+            # calcule temps de processus:
+            process_time = time.process_time()
+            # Utilisation en ressource
+            progress = psutil.Process()
+            cpu_percent = progress.cpu_percent()
+            memory_usage = progress.memory_percent()
+    return best_combination, best_yield, cpu_percent, memory_usage, process_time
 
 
-best_combination, best_yield, cpu_percent, memory_usage = get_gain(NEW_COMBINATIONS, 500)
-print(f"Meilleur combinaison: {best_combination}")
-print(f"Meilleur rendement: {best_yield}")
-print(f"Utilisation du processeur: {cpu_percent}")
-print(f"Utilisation de la RAM: {memory_usage}")
+best_combination, best_yield, process_time, cpu_percent, memory_usage = get_gain_optimized(NEW_COMBINATIONS, 500)
+print(f"Meilleur combinaison: {best_combination}\n"
+      f"Meilleur rendement: {best_yield} € \n"
+      f"Temps d'execution: {process_time} secondes \n"
+      f"cpu usage: {cpu_percent} % \n"
+      f"Usage de la Ram: {memory_usage} %")
+
+
