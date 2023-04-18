@@ -29,13 +29,16 @@ NEW_COMBINATIONS = [
 def get_gain_optimized(actions_list, budget_wallet=500):
     best_yield = 0
     # Appel de la fonction " all_combination " dans la boucle des combinaisons possible de la liste en dur
-    for combination in itertools.combinations(actions_list, 1):
+    for combination in itertools.combinations(actions_list, + 1):
         for action in combination:
             # calcule temps de processus:
             process_time = time.process_time()
             # calcule du rendement " action[1] correspond a l'élément 2 = prix de l'action
-            capital = int(budget_wallet / action[1])
-            rendement = (capital * action[2]) / 100
+            action_price = action[1]
+            action_yield = action[2]
+            capital = int(budget_wallet / action_price)
+            rendement = (capital * action_yield) / 100
+            print(rendement)
         if rendement > best_yield:
             best_yield = rendement
             best_combination = combination
