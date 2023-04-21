@@ -39,8 +39,10 @@ def get_gain(actions_list, wallet=500):
     get_combinations = all_combinations(actions_list)
     best_yield = 0
     for combination in get_combinations:
-        for action_price in combination:
-            rendement = (wallet / action_price[1]) * action_price[2] / 100
+        for action in combination:
+            action_price = action[1]
+            action_yield = action[2]
+            rendement = (wallet / action_price) * action_yield / 100
             best_yield = rendement
             best_combination = combination
             # calcule temps de processus:
