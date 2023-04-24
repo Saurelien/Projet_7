@@ -1,4 +1,5 @@
 import itertools
+import csv
 from itertools import combinations
 import time
 import psutil
@@ -7,6 +8,7 @@ import psutil
 PROCESS_TIME = time.process_time()
 # Utilisation en ressource
 PROGRESS = psutil.Process()
+PATH = "dataset1_Python+P7.csv"
 
 
 NEW_COMBINATIONS = [
@@ -33,10 +35,21 @@ NEW_COMBINATIONS = [
                    ]
 
 
+def get_csv_file(path):
+    action_list = []
+    with open(path, "r") as csv_file:
+        csv_reader = csv.reader(csv_file)
+        # Ne pas inclure l'entête du fichier
+        next(csv_reader)
+        for row in csv_reader:
+            action_list.append([row[0], float(row[1]), float(row[2])])
+    return action_list
+
+
 def all_combinations(actions_list):
     combinations = []
     for all_combinations in range(1, len(actions_list) + 1):
-        for combination in itertools.combinations(actions_list, all_combinations):
+        for combination in itertools.combinations(get_csv_file(PATH), all_combinations):
             combinations.append(combination)
     return combinations
 
@@ -82,7 +95,9 @@ def get_best(actions_list, wallet=500):
     return best_combination, best_yield, process_time, cpu_percent, memory_usage
 
 
-best_combination, best_yield, process_time, cpu_percent, memory_usage = get_best(NEW_COMBINATIONS)
+best_combination, best_yield, process_time, cpu_percent, memory_usage = get_best(PATH)
+list_action = get_csv_file(PATH)
+print(list_action)
 
 print(f"Meilleur combinaison: {best_combination}\n"
       f"Meilleur rendement: {best_yield} € \n"
