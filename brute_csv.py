@@ -81,5 +81,5 @@ print(f"Meilleur combinaison: {best_combination}\n"
 
 with open("Meilleurs Combinaisons", "w", newline="") as output_file:
     write = csv.writer(output_file)
-    for combination in get_best_csv_combinations(PATH, wallet=500):
-        write.writerow([','.join(stock[0] for stock in combination)])
+    for combination in get_best_csv_combinations(PATH):
+        write.writerow([','.join(action[0] for action in combination)])
