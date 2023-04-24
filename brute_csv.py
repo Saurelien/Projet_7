@@ -1,4 +1,4 @@
-import itertools
+import csv
 from itertools import combinations
 import time
 import psutil
@@ -7,38 +7,17 @@ import psutil
 PROCESS_TIME = time.process_time()
 # Utilisation en ressource
 PROGRESS = psutil.Process()
+PATH = "dataset1_Python+P7.csv"
 
-
-NEW_COMBINATIONS = [
-    ("#1", 20, 5),
-    ("#2", 30, 10),
-    ("#3", 50, 15),
-    ("#4", 70, 20),
-    ("#5", 60, 17),
-    ("#6", 80, 25),
-    ("#7", 22, 7),
-    ("#8", 26, 11),
-    ("#9", 48, 13),
-    ("#10", 34, 27),
-    ("#11", 42, 17),
-    ("#12", 110, 9),
-    ("#13", 38, 23),
-    ("#14", 14, 1),
-    ("#15", 18, 3),
-    ("#16", float(0.8), 8),
-    ("#17", float(0.4), 12),
-    ("#18", 10, 14),
-    ("#19", 24, 21),
-    ("#20", 114, 18)
-                   ]
-
-
-def all_combinations(actions_list):
-    combinations = []
-    for all_combinations in range(1, len(actions_list) + 1):
-        for combination in itertools.combinations(actions_list, all_combinations):
-            combinations.append(combination)
-    return combinations
+def get_csv_file(path):
+    action_list = []
+    with open(path, "r") as csv_file:
+        csv_reader = csv.reader(csv_file)
+        # Ne pas inclure l'entête du fichier
+        next(csv_reader)
+        for row in csv_reader:
+            action_list.append([row[0], float(row[1]), float(row[2])])
+    return action_list
 
 
 def get_price_for_combination(combination):
@@ -59,8 +38,17 @@ def get_gain_for_combination(combination):
     return total
 
 
-def get_best(actions_list, wallet=500):
-    combinations = all_combinations(actions_list)
+def get_csv_combinations(action_list):
+    all_combinations = []
+    for action_data in range(1, len(action_list) + 1):
+        for combination in combinations(action_list, action_data):
+            all_combinations.append(combination)
+    return all_combinations
+
+
+def get_best_csv_combinations(actions_list, wallet=500):
+    actions_list = get_csv_file(PATH)
+    combinations = get_csv_combinations(actions_list)
     best_combination = None
     best_yield = 0
     for combination in combinations:
@@ -82,7 +70,7 @@ def get_best(actions_list, wallet=500):
     return best_combination, best_yield, process_time, cpu_percent, memory_usage
 
 
-best_combination, best_yield, process_time, cpu_percent, memory_usage = get_best(NEW_COMBINATIONS)
+best_combination, best_yield, process_time, cpu_percent, memory_usage = get_best_csv_combinations(PATH)
 
 print(f"Meilleur combinaison: {best_combination}\n"
       f"Meilleur rendement: {best_yield} € \n"
