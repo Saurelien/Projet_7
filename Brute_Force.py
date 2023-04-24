@@ -92,6 +92,8 @@ def get_best(actions_list, wallet=500):
             # Utilisation en ressource
             cpu_percent = PROGRESS.cpu_percent()
             memory_usage = PROGRESS.memory_percent()
+            if memory_usage >= 99 and process_time > 300:
+                break
     return best_combination, best_yield, process_time, cpu_percent, memory_usage
 
 
