@@ -40,6 +40,7 @@ def get_gain_for_combination(combination):
 
 def get_csv_combinations(action_list):
     all_combinations = []
+    action_list = get_csv_file(PATH)
     for action_data in range(1, len(action_list) + 1):
         for combination in combinations(action_list, action_data):
             all_combinations.append(combination)
@@ -47,7 +48,6 @@ def get_csv_combinations(action_list):
 
 
 def get_best_csv_combinations(actions_list, wallet=500):
-    actions_list = get_csv_file(PATH)
     combinations = get_csv_combinations(actions_list)
     best_combination = None
     best_yield = 0
@@ -78,3 +78,8 @@ print(f"Meilleur combinaison: {best_combination}\n"
       f"Temps d'execution: {process_time} secondes \n"
       f"cpu usage: {cpu_percent} % \n"
       f"Usage de la Ram: {memory_usage} %")
+
+with open("Meilleurs Combinaisons", "w", newline="") as output_file:
+    write = csv.writer(output_file)
+    for combination in get_best_csv_combinations(PATH, wallet=500):
+        write.writerow([','.join(stock[0] for stock in combination)])
