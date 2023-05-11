@@ -1,6 +1,4 @@
 import itertools
-import csv
-from itertools import combinations
 import time
 import psutil
 
