@@ -6,8 +6,8 @@ import psutil
 PROCESS_TIME = time.process_time()
 # Utilisation en ressource
 PROGRESS = psutil.Process()
-PATH = "dataset1_Python+P7.csv"
-PATH_2 = "dataset2_Python+P7.csv"
+PATH = "CSV/dataset1_Python+P7.csv"
+PATH_2 = "CSV/dataset2_Python+P7.csv"
 
 
 NEW_COMBINATIONS = [
