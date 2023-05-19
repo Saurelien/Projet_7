@@ -1,7 +1,6 @@
 import time
 import psutil
 import csv
-import matplotlib.pyplot as plt
 
 PATH = "CSV/dataset1_Python+P7.csv"
 PATH_2 = "CSV/dataset2_Python+P7.csv"
@@ -28,7 +27,7 @@ class Colors:
 
 
 def get_actions_from_csv(file_path_1):
-    """TEST, Cette fonction prend en entrée un chemins de fichier type csv et renvoie une liste
+    """Cette fonction prend en entrée un chemins de fichier type csv et renvoie une liste
     contenant les données du fichier."""
 
     # Récupération et convertion du fichier csv
@@ -51,13 +50,17 @@ def get_actions_from_csv(file_path_1):
 
 
 def display_best_action(action):
-    return print(f"\n {Colors.HEADER+ Colors.BOLD}name: {Colors.GREEN}{action[0]}"
-                 f"\n {Colors.HEADER}prix: {Colors.OKCYAN}{action[1]:2f}"
-                 f"\n {Colors.HEADER}profit: {Colors.OKBLUE}{action[2]:2f}"
-                 f"\n {Colors.HEADER}rendement réelle: {Colors.DESIGN}{Colors.GREEN}{action[3]:2f}\n")
+    return print(f"\n {Colors.HEADER+ Colors.BOLD}name:{Colors.GREEN}{action[0]}"
+                 f"\n {Colors.HEADER}prix:{Colors.OKCYAN}{action[1]:2f}"
+                 f"\n {Colors.HEADER}profit:{Colors.OKBLUE}{action[2]:2f}"
+                 f"\n {Colors.HEADER}rendement réelle:{Colors.DESIGN}{Colors.GREEN}{action[3]:2f}\n")
 
 
 def get_action_best_yield(action_list, budget):
+    """Cette fonction calcule le nomdre d'actions acheté.
+       Le temps et utilisation de la mémoire et processeur lors du processus
+       Vérifie si le prix de l'action est inférieur au budget
+       et retourne les données filtrées selon une approche gloutonne"""
     # Calcule du nombre d'actions du program:
     action_counts = 0
 
@@ -87,13 +90,13 @@ def get_action_best_yield(action_list, budget):
             if budget <= 0:
                 break
 
-    return print(f"\n {Colors.HEADER + Colors.BOLD}Temps écoulé: {Colors.GREEN}{elapsed_time:.3f} seconds "
-                 f"\n {Colors.HEADER}Utilisation du cpu: {Colors.GREEN}{cpu_usage}%"
+    return print(f"\n {Colors.HEADER + Colors.BOLD}Temps écoulé:{Colors.GREEN}{elapsed_time:.3f} seconds "
+                 f"\n {Colors.HEADER}Utilisation du cpu:{Colors.GREEN}{cpu_usage}%"
                  f"\n {Colors.HEADER}utilisation de la mémoire: "
                  f"{Colors.GREEN}{(mem_after - MEM_BEFORE) / 1024 / 1024:.2f} MB"
-                 f"\n {Colors.HEADER}Number of actions: {Colors.GREEN}{action_counts}"
-                 f"\n {Colors.HEADER}Budget final restant: {Colors.GREEN}{budget:.2f}$ "
-                 f"\n {Colors.HEADER}Rendement réelle : {Colors.GREEN}{total_gain}")
+                 f"\n {Colors.HEADER}Number of actions:{Colors.GREEN}{action_counts}"
+                 f"\n {Colors.HEADER}Budget final restant:{Colors.GREEN}{budget:.2f}$ "
+                 f"\n {Colors.HEADER}Rendement réelle :{Colors.DESIGN}{Colors.GREEN}{total_gain}")
 
 
 action_list1 = get_actions_from_csv(PATH)
