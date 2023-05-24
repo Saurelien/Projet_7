@@ -9,32 +9,32 @@
   <h3><strong>Linux/Mac:</strong></h3>
   <br>
   
-  <p><strong style="color: #ff9900;">Pour installer <code>virtualenv</code> si cela n'est pas déjà fait:</strong></p>
+  <p><strong style="color: orange;">Pour installer <code style="color : cyan">virtualenv</code> si cela n'est pas déjà fait:</strong></p>
   
-  <p><code>pip install virtualenv</code></p>
+  <p><code style="color : cyan">pip install virtualenv</code></p>
   
   <p><strong style="color: #ff9900;">Ou créer directement l'environnement:</strong></p>
   
-  <p><code>python3 -m venv venv</code></p>
+  <p><code style="color : cyan">python3 -m venv venv</code></p>
   
   <p><strong style="color: #ff9900;">Activer l'environnement virtuel:</strong></p>
   
-  <p><code>source venv/bin/activate</code></p>
+  <p><code style="color : cyan">source venv/bin/activate</code></p>
   
   <h3><strong>Windows:</strong></h3>
   <br>
   
-  <p><strong style="color: #ff9900;">Pour installer <code>virtualenv</code> si cela n'est pas déjà fait:</strong></p>
+  <p><strong style="color: #ff9900;">Pour installer <code style="color : cyan">virtualenv</code> si cela n'est pas déjà fait:</strong></p>
   
-  <p><code>pip install virtualenv</code></p>
+  <p><code style="color : cyan">pip install virtualenv</code></p>
   
   <p><strong style="color: #ff9900;">Ou créer directement l'environnement:</strong></p>
   
-  <p><code>python -m venv venv</code></p>
+  <p><code style="color : cyan">python -m venv venv</code></p>
   
   <p><strong style="color: #ff9900;">Activer l'environnement virtuel:</strong></p>
   
-  <p><code>.\venv\Scripts\activate</code></p>
+  <p><code style="color : cyan">.\venv\Scripts\activate</code></p>
 </div>
 
 <div align="center">
