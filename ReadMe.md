@@ -10,13 +10,13 @@
   <br>
   
   <ul style="list-style-type: none;">
-    <li><strong>Pour installer <code>virtualenv</code> si cela n'est pas déjà fait:</strong></li>
+    <p><strong>Pour installer <code>virtualenv</code> si cela n'est pas déjà fait:</strong></p>
     <li><strong>pip install virtualenv</strong></li>
     <br>
-    <li><strong>Ou créer directement l'environnement:</strong></li>
+    <p><strong>Ou créer directement l'environnement:</strong></p>
     <li><strong>python3 -m venv venv</strong></li>
     <br>
-    <li><strong>Activer l'environnement virtuel:</strong></li>
+    <p><strong>Activer l'environnement virtuel:</strong></p>
     <li><strong>source venv/bin/activate</strong></li>
   </ul>
   
@@ -24,13 +24,13 @@
   <br>
   
   <ul style="list-style-type: none;">
-    <li><strong>Pour installer <code>virtualenv</code> si cela n'est pas déjà fait:</strong></li>
+    <p><strong>Pour installer <code>virtualenv</code> si cela n'est pas déjà fait:</strong></p>
     <li><strong>pip install virtualenv</strong></li>
     <br>
-    <li><strong>Ou créer directement l'environnement:</strong></li>
+    <p><strong>Ou créer directement l'environnement:</strong></p>
     <li><strong>python -m venv venv</strong></li>
     <br>
-    <li><strong>Activer l'environnement virtuel:</strong></li>
+    <p><strong>Activer l'environnement virtuel:</strong></p>
     <li><strong>.\venv\Scripts\activate</strong></li>
   </ul>
 </div>
