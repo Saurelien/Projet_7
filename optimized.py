@@ -41,7 +41,7 @@ def get_actions_from_csv(file_path_1):
         for name, price, profit in reader:
             price = float(price)
             profit = float(profit)
-            if price >= 0 and profit >= 0:
+            if price > 0 and profit > 0:
                 action_list.append((name, price, profit, price * profit / 100))
 
     # Trier les actions en fonction de leur rendement, du plus élevé au plus faible
