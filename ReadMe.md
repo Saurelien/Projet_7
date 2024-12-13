@@ -40,7 +40,7 @@
 <div align="center">
   <h2 style="color: #ff9900; font-size: 60px;">Installation des dépendances</h2>
   <br>
-  <p>Vous trouverez dans le repo un fichier : <code>requirements.txt</code></p>
-  <p><strong>Installer les dépendances depuis le fichier:</strong></p>
-  <p><code>pip install -r requirements.txt</code></p>
+  <p style="color: #ff9900;">Vous trouverez dans le repo un fichier : <code style="color: cyan;">requirements.txt</code></p>
+  <p style="color: #ff9900;"><strong>Installer les dépendances depuis le fichier:</strong></p>
+  <p><code style="color: cyan;">pip install -r requirements.txt</code></p>
 </div>

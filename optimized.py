@@ -51,15 +51,15 @@ def get_actions_from_csv(file_path_1):
 
 def display_best_action(action):
     return print(f"\n {Colors.HEADER+ Colors.BOLD}name:{Colors.GREEN}{action[0]}"
-                 f"\n {Colors.HEADER}prix:{Colors.OKCYAN}{action[1]:2f}"
-                 f"\n {Colors.HEADER}profit:{Colors.OKBLUE}{action[2]:2f}"
-                 f"\n {Colors.HEADER}rendement réelle:{Colors.DESIGN}{Colors.GREEN}{action[3]:2f}\n")
+                 f"\n {Colors.HEADER}prix:{Colors.OKCYAN}{action[1]:.2f}"
+                 f"\n {Colors.HEADER}profit:{Colors.OKBLUE}{action[2]:.2f} %"
+                 f"\n {Colors.HEADER}rendement réelle:{Colors.DESIGN}{Colors.GREEN}{action[3]:.4f}")
 
 
 def get_action_best_yield(action_list, budget):
     """Cette fonction calcule le nomdre d'actions acheté.
-       Le temps et utilisation de la mémoire et processeur lors du processus
-       Vérifie si le prix de l'action est inférieur au budget
+       Le temps et l'utilisation de la mémoire ainsi que celle du cpu
+       Vérifie si le prix de l'action est inférieur au budget restant
        et retourne les données filtrées selon une approche gloutonne"""
     # Calcule du nombre d'actions du program:
     action_counts = 0
@@ -69,14 +69,14 @@ def get_action_best_yield(action_list, budget):
     total_gain = 0
     for action in action_list:
         if action[1] <= budget:
-            # Si le prix de l'action est inferieur a 500$, j'ajoutes:
+            # Si le prix de l'action est inferieur au budget restant j'ajoutes:
             # Le nom, Le prix, Le profit, Le rendement dans le dictionnaire best_actions
             best_actions.append({
                 "name": action[0],
                 "price": action[1],
                 "profit": action[2],
                 "yield": action[3]
-            })
+                                })
             budget -= action[1]
             display_best_action(action)
             action_counts += 1
@@ -89,14 +89,13 @@ def get_action_best_yield(action_list, budget):
             elapsed_time = time.monotonic() - START_TIME
             if budget <= 0:
                 break
-
     return print(f"\n {Colors.HEADER + Colors.BOLD}Temps écoulé:{Colors.GREEN}{elapsed_time:.3f} seconds "
                  f"\n {Colors.HEADER}Utilisation du cpu:{Colors.GREEN}{cpu_usage}%"
                  f"\n {Colors.HEADER}utilisation de la mémoire: "
                  f"{Colors.GREEN}{(mem_after - MEM_BEFORE) / 1024 / 1024:.2f} MB"
-                 f"\n {Colors.HEADER}Number of actions:{Colors.GREEN}{action_counts}"
-                 f"\n {Colors.HEADER}Budget final restant:{Colors.GREEN}{budget:.2f}$ "
-                 f"\n {Colors.HEADER}Rendement réelle :{Colors.DESIGN}{Colors.GREEN}{total_gain}")
+                 f"\n {Colors.HEADER}Nombre d'actions:{Colors.GREEN}{action_counts}"
+                 f"\n {Colors.HEADER}Budget final restant:{Colors.GREEN}{budget:.2f}$"
+                 f"\n {Colors.HEADER}Rendement réelle :{Colors.DESIGN}{Colors.GREEN}{total_gain:.2f} $")
 
 
 action_list1 = get_actions_from_csv(PATH)

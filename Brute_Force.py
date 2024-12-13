@@ -6,8 +6,6 @@ import psutil
 PROCESS_TIME = time.process_time()
 # Utilisation en ressource
 PROGRESS = psutil.Process()
-PATH = "CSV/dataset1_Python+P7.csv"
-PATH_2 = "CSV/dataset2_Python+P7.csv"
 
 
 NEW_COMBINATIONS = [
@@ -65,12 +63,12 @@ def get_best(actions_list, wallet=500):
     best_combination = None
     best_yield = 0
     for combination in combinations:
-        # check action price
+        # Verification du prix de l'action
         total_price = get_price_for_combination(combination)
         if total_price > wallet:
             continue
 
-        # check gain
+        # verification du rendement
         rendement = get_gain_for_combination(combination)
         if rendement > best_yield:
             best_combination = combination
@@ -80,8 +78,6 @@ def get_best(actions_list, wallet=500):
             # Utilisation en ressource
             cpu_percent = PROGRESS.cpu_percent()
             memory_usage = PROGRESS.memory_percent()
-            if memory_usage >= 99 and process_time > 300:
-                break
     return best_combination, best_yield, process_time, cpu_percent, memory_usage
 
 
@@ -89,8 +85,8 @@ best_combination, best_yield, process_time, cpu_percent, memory_usage = get_best
 
 
 print(f"Meilleur combinaison: {best_combination}\n"
-      f"Meilleur rendement: {best_yield} € \n"
-      f"Meilleur prix: {get_price_for_combination(best_combination)} \n"
+      f"Meilleur rendement: {best_yield:.2f} € \n"
+      f"Budget utilisé: {get_price_for_combination(best_combination)} \n"
       f"Temps d'execution: {process_time} secondes \n"
       f"cpu usage: {cpu_percent} % \n"
-      f"Usage de la Ram: {memory_usage} %")
+      f"Usage de la Ram: {memory_usage:.2f} %")
